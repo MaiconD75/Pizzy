@@ -1,0 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button, a, strong, span, p, th, td {
+  font: 500 32px Roboto, sans-serif;
+}
