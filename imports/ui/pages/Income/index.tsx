@@ -46,8 +46,6 @@ const Income: React.FC = () => {
   const isLoading = useSubscribe('allIncomes');
   const incomes = useFind(() => IncomesCollection.find({}));
 
-  console.log(isLoading());
-
   if(isLoading()) {
     return (
       <Container>

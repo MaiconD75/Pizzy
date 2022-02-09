@@ -7,3 +7,7 @@
 button, a, strong, span, p, th, td {
   font: 500 32px Roboto, sans-serif;
 }
+
+button {
+  cursor: pointer;
+}

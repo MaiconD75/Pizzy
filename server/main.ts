@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import '/imports/api/incomes/IncomePublications';
 
 import { IncomesCollection } from '/imports/api/incomes/IncomeCollection';
@@ -21,7 +22,25 @@ function insertIncome(
     IncomesCollection.insert({ month, year, total_sales, total_expenses });
 }
 
+const SEED_USERNAME = 'user';
+const SEED_PASSWORD = '1234567';
+const ANOTHER_SEED_USERNAME = 'maicon';
+const ANOTHER_SEED_PASSWORD = '7654321';
+
 Meteor.startup(() => {
+  if(!Accounts.findUserByUsername(SEED_USERNAME)) {
+    Accounts.createUser({
+      username: SEED_USERNAME,
+      password: SEED_PASSWORD,
+    })
+  }
+
+  if(!Accounts.findUserByUsername(ANOTHER_SEED_USERNAME)) {
+    Accounts.createUser({
+      username: ANOTHER_SEED_USERNAME,
+      password: ANOTHER_SEED_PASSWORD,
+    })
+  }
 
   if (IncomesCollection.find().count() === 0) {
     [

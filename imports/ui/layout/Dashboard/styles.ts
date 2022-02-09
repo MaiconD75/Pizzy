@@ -1,16 +1,60 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 64px);
+  margin-top: 64px;
   background-color: #4E5051;
   display: flex;
   flex-direction: row;
 `;
 
-export const Menu = styled.div`
-  width: 475px;
-  height: 100vh;
+export const Header = styled.header`
+  height: 64px;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: #383D3D;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+
+  button {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 16px;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+`;
+
+export const SideBarButton = styled.button`
+  left: 24px;
+
+  svg {
+    color: #DBE0DE;
+  }
+`;
+
+export const LogOutButton = styled.button`
+  right: 24px;
+
+  svg {
+    color: #b33924;
+  }
+`;
+
+interface MenuProps {
+  sideBarIsClose: boolean
+}
+
+export const Menu = styled.div<MenuProps>`
+  width: 320px;
+  height: 100%;
   background-color: #383D3D;
   display: flex;
   flex-direction: column;
@@ -26,6 +70,10 @@ export const Menu = styled.div`
 
     border-bottom: 1px solid #DBE0DE;
   }
+
+  ${props => props.sideBarIsClose && css`
+      display: none;
+  ` }
 `;
 
 export const MenuItens = styled.div`
