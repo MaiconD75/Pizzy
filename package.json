@@ -11,6 +11,8 @@
     "@babel/runtime": "^7.15.4",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@mui/x-data-grid": "^5.5.0",
+    "@types/meteor-roles": "^1.2.33",
     "bcrypt": "^5.0.1",
     "chart.js": "^3.7.0",
     "meteor-node-stubs": "^1.1.0",

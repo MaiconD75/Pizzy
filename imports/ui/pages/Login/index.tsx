@@ -20,14 +20,22 @@ const Login: React.FC = () => {
       navigation('/dashboard/pizzas');
     }
   }, [username, password]);
-  
 
   return (
     <Container>
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <TextField label="Username" variant="outlined" onChange={e => setUsername(e.currentTarget.value)}/>
-        <TextField label="Password" type="password" variant="outlined" onChange={e => setPassword(e.currentTarget.value)}/>
+        <TextField 
+          label="Username" 
+          variant="outlined" 
+          onChange={e => setUsername(e.currentTarget.value)}
+        />
+        <TextField 
+          label="Password" 
+          type="password" 
+          variant="outlined" 
+          onChange={e => setPassword(e.currentTarget.value)}
+        />
         <button type="submit">Login</button>
       </form>
     </Container>

@@ -11,3 +11,9 @@ button, a, strong, span, p, th, td {
 button {
   cursor: pointer;
 }
+
+h1 {
+  font: 700 96px Quicksand, sans-serif;
+  color: #FDBC37;
+  text-align: center;
+}

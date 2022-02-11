@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -14,9 +14,29 @@ import {
   Item
 } from './styles';
 
+interface IPremissions {
+  income: boolean,
+  user: boolean,
+}
+
 const Dashboard: React.FC = () => {
   const [sideBarIsClose, setSideBarIsClose] = useState(true);
   const user = useTracker(() => Meteor.user());
+  const [permissions, setPermissions] = useState<IPremissions>({
+    income: false,
+    user: false,
+  })
+
+  useEffect(() => {
+    if(user) {
+      const userId = user._id;
+      
+      setPermissions({
+        income: Roles.userIsInRole(userId, 'INCOMES_ACCESS'),
+        user: Roles.userIsInRole(userId, 'USERS_ACCESS'),
+      })
+    }
+  }, [user?._id])
 
   const navigation = useNavigate();
 
@@ -41,19 +61,30 @@ const Dashboard: React.FC = () => {
       <Menu sideBarIsClose={sideBarIsClose}>
         <h1>Pizzy</h1>
         <MenuItens>
-          <Item>
+          <Item canShow>
             <Link to='/dashboard/pizzas'>
               Pizzas
             </Link>
           </Item>
-          <Item>
+          <Item canShow={permissions.income}>
             <Link to='/dashboard/income'>
               Income
             </Link>
           </Item>
+          <Item canShow={permissions.user}>
+            <Link to='/dashboard/register_user'>
+              New User
+            </Link>
+          </Item>
         </MenuItens>
       </Menu>
-        <Outlet />
+        {user === undefined ? 
+        (
+          <strong>loading...</strong>
+        ) : 
+        (
+          <Outlet />
+        )}
     </Container>
   );
 }

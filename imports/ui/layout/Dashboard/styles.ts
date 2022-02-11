@@ -61,12 +61,9 @@ export const Menu = styled.div<MenuProps>`
   align-items: center;
 
   h1 {
-    font: 700 96px Quicksand, sans-serif;
-    color: #FDBC37;
     padding: 16px;
     margin: 32px;
     width: 80%;
-    text-align: center;
 
     border-bottom: 1px solid #DBE0DE;
   }
@@ -82,11 +79,15 @@ export const MenuItens = styled.div`
   
 `;
 
-export const Item = styled.div`
+interface ItemProps {
+  canShow: boolean;
+}
+
+export const Item = styled.div<ItemProps>`
   width: 240px;
   height: 64px;
   background-color: #FDBC37;
-  display: flex;
+  display: ${props => props.canShow ? "flex" : "none"};
   align-items: center;
   justify-content: center;
   border-radius: 8px;

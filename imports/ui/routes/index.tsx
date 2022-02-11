@@ -5,6 +5,7 @@ import Income from '../pages/Income';
 import Login from '../pages/Login';
 import Dashboard from '../layout/Dashboard';
 import RequireAuth from './RequireAuth';
+import RegisterUser from '../pages/RegisterUser';
 
 const Routes: React.FC = () => {
   return (
@@ -17,10 +18,11 @@ const Routes: React.FC = () => {
       } >
         <Route path='pizzas' element={<Pizzas />} />
         <Route path='income' element={<Income />} />
+        <Route path='register_user' element={<RegisterUser />} />
       </Route>
       <Route
           path="/*"
-          element={<Navigate to="/dashboard" />}
+          element={<Navigate to="/dashboard/pizzas" />}
       />
     </ReactRoutes>
   );

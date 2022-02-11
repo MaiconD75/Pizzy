@@ -20,13 +20,6 @@ export const Container = styled.div`
 
     flex-direction: column;
 
-
-    h1 {
-      font: 700 96px Quicksand, sans-serif;
-      color: #FDBC37;
-      text-align: center;
-    }
-
     > div {
       width: 100%;
     }
@@ -38,16 +31,11 @@ export const Container = styled.div`
 
       border: none;
       background-color: #FDBC37;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       border-radius: 8px;
       
       color: #fefefe;
     }
   }
-
-  
 
   input, label, p {
     color: #DBE0DE;
