@@ -9,16 +9,23 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/x-data-grid": "^5.5.0",
+    "@types/meteor-roles": "^1.2.33",
+    "bcrypt": "^5.0.1",
     "chart.js": "^3.7.0",
     "meteor-node-stubs": "^1.1.0",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-meteor-data": "^0.2.11",
     "react-router-dom": "^6.2.1",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@mui/material": "^5.4.1",
     "@types/meteor": "^1.4.81",
     "@types/mocha": "^8.2.3",
     "@types/react": "^17.0.30",

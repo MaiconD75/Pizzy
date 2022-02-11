@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Chart as ChartJS,
@@ -22,8 +22,9 @@ ChartJS.register(
   Legend
 );
 import { Container } from './styles';
-import { useFind, useSubscribe } from 'meteor/react-meteor-data';
+import { useFind, useSubscribe, useTracker } from 'meteor/react-meteor-data';
 import { IncomesCollection, Income } from '/imports/api/incomes/IncomeCollection';
+import { Navigate } from 'react-router-dom';
 
 const options = {
     plugins: {
@@ -43,19 +44,30 @@ const options = {
 }
 
 const Income: React.FC = () => {
+  const user = useTracker(() => Meteor.user());
+
   const isLoading = useSubscribe('allIncomes');
   const incomes = useFind(() => IncomesCollection.find({}));
+  const [getAccess, setGetAccess] = useState(true);
 
-  console.log(isLoading());
+  useEffect(() => {
+    if (user?._id) {
+      setGetAccess(Roles.userIsInRole(user._id, 'INCOMES_ACCESS'));
+    }
+  }, [user?._id])
 
   if(isLoading()) {
     return (
       <Container>
         <strong>
-          Carregando...
+          loading...
         </strong>
       </Container>
     );
+  }
+
+  if (!getAccess) {
+    return <Navigate to="/dashboard/pizzas" />
   }
 
   const data = {

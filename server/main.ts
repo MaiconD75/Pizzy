@@ -1,5 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
+
 import '/imports/api/incomes/IncomePublications';
+import '/imports/api/users/UserMethod';
 
 import { IncomesCollection } from '/imports/api/incomes/IncomeCollection';
 import { PizzasCollection, } from '/imports/api/pizzas/PizzasCollection';
@@ -21,7 +25,40 @@ function insertIncome(
     IncomesCollection.insert({ month, year, total_sales, total_expenses });
 }
 
+const SEED_USERNAME = 'user';
+const SEED_PASSWORD = '1234567';
+const ANOTHER_SEED_USERNAME = 'maicon';
+const ANOTHER_SEED_PASSWORD = '7654321';
+
 Meteor.startup(() => {
+  if(Roles.getAllRoles().fetch().length <= 0) {
+    Roles.createRole('USERS_ACCESS');
+    Roles.createRole('INCOMES_ACCESS');
+    Roles.createRole('manager');
+    Roles.createRole('user');
+    Roles.createRole('accountant');
+
+    Roles.addRolesToParent(['USERS_ACCESS', 'INCOMES_ACCESS'], 'manager');
+    Roles.addRolesToParent(['INCOMES_ACCESS'], 'accountant');
+  }
+
+  if(!Accounts.findUserByUsername(SEED_USERNAME)) {
+    const newUserId = Accounts.createUser({
+      username: SEED_USERNAME,
+      password: SEED_PASSWORD,
+    });
+
+    Roles.addUsersToRoles(newUserId, 'accountant')
+  }
+
+  if(!Accounts.findUserByUsername(ANOTHER_SEED_USERNAME)) {
+    const newUserId = Accounts.createUser({
+      username: ANOTHER_SEED_USERNAME,
+      password: ANOTHER_SEED_PASSWORD,
+    });
+
+    Roles.addUsersToRoles(newUserId, 'manager')
+  }
 
   if (IncomesCollection.find().count() === 0) {
     [

@@ -7,3 +7,13 @@
 button, a, strong, span, p, th, td {
   font: 500 32px Roboto, sans-serif;
 }
+
+button {
+  cursor: pointer;
+}
+
+h1 {
+  font: 700 96px Quicksand, sans-serif;
+  color: #FDBC37;
+  text-align: center;
+}
